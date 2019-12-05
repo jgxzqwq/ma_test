@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js" ></script>
+	
+	<script>
+		$(function(){
+			
+		/*	$.ajax({
+				type:"get",
+				url:"http://ma.xiaomy.net/ma/getUser.html",
+				data:{"account":"学校","password":"123"},
+				dataType:"json",
+				 ContentType :"application/x-www-form-urlencoded",
+				 success:function(data){
+				 	console.log(data)
+				 }
+			})*/
+			
+			
+			/*$.ajax({
+					type:"post",
+					url:"http://localhost:8080/ma/updateUser.html",
+					data:{"account":"学校","password":"123"},
+					dataType:"json",
+					 ContentType :"application/x-www-form-urlencoded",
+					 success:function(data){
+					 	console.log(data)
+					 }
+				})
+			*/
+			 $("#btn").click(function(){
+				alert(123);
+				var email=$("#email").val();
+				console.log(email)
+				$.ajax({
+					type:"post",
+					url:"http://ma.xiaomy.net/ma/getMailbox.html",
+					data:{"Mailbox":email},
+					dataType:"json",
+					 ContentType :"application/x-www-form-urlencoded",
+					 success:function(data){
+					 	console.log(data)
+					 }
+				})
+			})
+			
+			
+			$("#submit").click(function(){
+				var code=$("#code").val();
+				console.log(code)
+				$.ajax({
+					type:"post",
+					url:"http://ma.xiaomy.net/ma/getCode.html",
+					data:{"Code":code},
+					dataType:"json",
+					 ContentType :"application/x-www-form-urlencoded",
+					 success:function(data){
+					 	console.log(data)
+					 }
+				})
+			}) 
+		})
+	</script>
+	</head>
+	
+	<body>
+		<div class="form-group">
+						<label class="col-sm-2 control-label">邮箱</label>
+						<div class="col-sm-5">
+							<input type="email" placeholder="请填写邮箱地址..." class="form-control"
+								id="email" name="email" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">验证码</label>
+						<div class="col-sm-5">
+							<input type="text" name="code" id="code" placeholder="请输入邮箱的验证码"
+								class="form-control" required> 
+								<input type="button" name="btn"
+								class="btn btn-default" id="btn" value="发送验证码" />
+						</div>
+					</div>
+					<span id="notice" class="hide">请先完成邮箱验证</span><br />
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<a href="login.jsp" class="btn btn-success">返回登录</a> <input
+								class="btn btn-info" type="submit" id="submit" value="邮箱注册" />
+						</div>
+					</div>
+	</body>
+</html>

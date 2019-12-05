@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        <!-- 扫描注解的包 -->
+        <context:component-scan base-package="com.ma.controller"/>
+        <!-- 开启注解 -->
+        <mvc:annotation-driven/>
+        <!--静态资源访问-->
+		<mvc:default-servlet-handler/>
+
+
+  <!-- 处理请求返回json字符串的乱码问题 -->  
+     <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
+<!-- 以.html为后缀名访问，默认返回数据类型是 text/html， 所以要修改返回的数据类型 -->
+<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+    <property name="mediaTypes">
+        <map>
+            <entry key="html" value="application/json;charset=UTF-8"/>
+        </map>
+    </property>
+</bean>
+
+<bean  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+                <property name="templateLoaderPath" value="/"></property>
+        </bean>
+        <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+                <property name="contentType" value="text/html;charset=UTF-8"></property>
+                	<property name="prefix" value="/"></property>
+                <property name="suffix" value=".html" />
+        </bean>
+
+		<!-- 配置视图解析器 -->
+       <!--  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        	<property name="prefix" value="/WEB-INF/jsp/"></property>
+        	<property name="suffix" value=".jsp"></property>
+        </bean>     -->
+        
+        
+        <bean class="util.SwaggerConfig"></bean>
+
+<!-- 根据profile配置不同的location，就可以在生产环境中禁用Swagger -->
+<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/> 
+<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+        
+</beans>
