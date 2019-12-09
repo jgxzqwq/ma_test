@@ -4,27 +4,35 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js" ></script>
-
-</head>
-<body>
 <script>
+	
+//	private Integer id;
+//private String name;
+//private String clazz;
+//private String grade;
+//private Integer experience;
+//private String head_img;
+//private Integer score;
 		$(function(){
-			//var userInfo={"userInfo":{"name":"测试","clazz":"大数据1班","grade":18,"experience":200,"head_img":"http://ma.xiaomy.net/ma/img/t1.jpg","score":15}};
+		var userInfo={id:1,name:'测试',clazz:'大数据1班',grade:'18',experience:200,head_img:'http://ma.xiaomy.net/ma/img/t1.jpg',score:15}
+		//console.log(JSON.stringify({userInfo:{id:1,name:"测试",clazz:"大数据1班",grade:"18",experience:200,head_img:"http://ma.xiaomy.net/ma/img/t1.jpg",score:15}}))
+	console.log(JSON.stringify({userInfo}))
 			$.ajax({
-				type:"get",
-				url:"http://ma.xiaomy.net/ma/updateUserInfo",
-				//data:JSON.stringify(userInfo),
+				type:"post",
+				url:"http://192.168.117.66:8080/ma/updateUserInfo",
+				 data:JSON.stringify(userInfo),
 				 dataType:"json", 
-				 ContentType :"application/json;charset=UTF-8",
+				 contentType:"application/json",
 				 success:function(data){
 				 	console.log(data)
-				 },error: function(XMLHttpRequest, textStatus, errorThrown) {
-                     alert(XMLHttpRequest.status);
-                     alert(XMLHttpRequest.readyState);
-                     alert(textStatus);
+				 },error: function(e) {
+                    console.log(e)
 				 }
 			})
 		})
 </script>
+</head>
+<body>
+
 </body>
 </html>

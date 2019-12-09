@@ -14,10 +14,10 @@ public class UserInfoServiceImpl implements UserInfoService{
 	@Autowired
 	private UserInfoRepository userInfoRepository;
 	@Override
-	public void updateUserInfo(UserInfo userInfo) {
+	public UserInfo updateUserInfo(UserInfo userInfo) {
 		// TODO Auto-generated method stub
-		
-		userInfoRepository.updateUserInfo(userInfo);
+	
+		return userInfoRepository.updateUserInfo(userInfo);
 	}
 
 }

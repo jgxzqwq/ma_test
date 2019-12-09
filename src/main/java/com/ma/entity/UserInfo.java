@@ -12,7 +12,7 @@ import javax.persistence.Table;
 //数据库表
 @Table(name="userinfo")
 //实体类
-@Entity(name="userInfo")
+@Entity(name = "userInfo")
 public class UserInfo implements Serializable {
 	
 private static final long serialVersionUID = 1L;

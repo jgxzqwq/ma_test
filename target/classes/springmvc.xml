@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context" 
-    xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
         <!-- 扫描注解的包 -->
         <context:component-scan base-package="com.ma.controller"/>
+        <context:component-scan base-package="com.ma.service"/>
+        <aop:aspectj-autoproxy/>
         <!-- 开启注解 -->
         <mvc:annotation-driven/>
         <!--静态资源访问-->
@@ -19,19 +19,22 @@
 
 
   <!-- 处理请求返回json字符串的乱码问题 -->  
-     <mvc:annotation-driven>
+     <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
+                        <value>text/html;charset=UTF-8</value>
                         <value>application/json;charset=UTF-8</value>
+                        <value>*/*;charset=UTF-8</value>
+
                     </list>
                 </property>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
+
 <!-- 以.html为后缀名访问，默认返回数据类型是 text/html， 所以要修改返回的数据类型 -->
 <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
     <property name="mediaTypes">
@@ -55,6 +58,21 @@
         	<property name="prefix" value="/WEB-INF/jsp/"></property>
         	<property name="suffix" value=".jsp"></property>
         </bean>     -->
+        
+         <bean id="serviceAop" class="com.ma.service.MyXmlServiceAop"></bean>
+    
+    <aop:config>
+        <aop:aspect ref="serviceAop">
+            <aop:pointcut expression="!execution(* com.ma.controller.UserController.*(..)) and execution(* com.ma.controller.*.*(..))" id="handlerXml"/> <!-- 带参 切点-->
+     
+            <aop:before method="beforeHandler" pointcut-ref="handlerXml" /> <!-- 前置通知，传递参数 -->
+            <aop:around method="aroundHandler" pointcut-ref="handlerXml"/> <!-- 环绕通知 -->
+          
+             <aop:after-throwing method="throwExceptionHandler" throwing="ex" pointcut-ref="handlerXml"/> <!-- 异常通知 -->
+        </aop:aspect>
+    </aop:config>
+        
+        
         
         
         <bean class="util.SwaggerConfig"></bean>

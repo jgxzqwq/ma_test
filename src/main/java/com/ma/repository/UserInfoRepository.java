@@ -11,13 +11,13 @@ import com.ma.entity.UserInfo;
 
 public interface UserInfoRepository extends JpaRepository<UserInfo, Integer>{
 
-//	@Transactional
-//	@Modifying(clearAutomatically = true)
-//	@Query(value="update UserInfo  set name= :#{#userInfo.name},clazz= :#{#userInfo.clazz},grade= :#{#userInfo.grade},experience= :#{#userInfo.experience},head_img= :#{#userInfo.head_img},score= :#{#userInfo.score}  where id=  :#{#userInfo.id}",nativeQuery=true)
-//	void updateUserInfo(@Param("userInfo") UserInfo userInfo);
-	
-	
-	
-	@Query(value="select * from UserInfo  where id=:#{#userInfo.id}",nativeQuery=true)
+/*	@Transactional
+	@Modifying
+	@Query(value="update UserInfo  set name= :#{#userInfo.name},clazz= :#{#userInfo.clazz},grade= :#{#userInfo.grade},experience= :#{#userInfo.experience},head_img= :#{#userInfo.head_img},score= :#{#userInfo.score}  where id=  :#{#userInfo.id}",nativeQuery=true)
 	void updateUserInfo(UserInfo userInfo);
+	*/
+	
+	
+	@Query(value="select * from UserInfo  where id =  ?#{#userInfo.getId()} ",nativeQuery=true)
+	UserInfo updateUserInfo(UserInfo userInfo);
 }

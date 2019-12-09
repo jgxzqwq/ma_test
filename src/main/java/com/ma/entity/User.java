@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -20,7 +22,7 @@ private Integer id;
 private String account;
 private String password;
 private String mailbox;
-
+private User user;
 
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Id
@@ -48,10 +50,21 @@ public String getMailbox() {
 public void setMailbox(String mailbox) {
 	this.mailbox = mailbox;
 }
+
+@OneToOne
+@JoinColumn(name="user_id",unique=true)
+public User getUser() {
+	return user;
+}
+public void setUser(User user) {
+	this.user = user;
+}
 @Override
 public String toString() {
-	return "User [id=" + id + ", account=" + account + ", password=" + password + ", mailbox=" + mailbox + "]";
+	return "User [id=" + id + ", account=" + account + ", password=" + password + ", mailbox=" + mailbox + ", user="
+			+ user + "]";
 }
+
 
 
 }

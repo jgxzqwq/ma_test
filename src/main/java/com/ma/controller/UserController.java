@@ -212,7 +212,7 @@ defaultValue：参数的默认值
 	    })*/
 	
 	@RequestMapping(value={"/getUser"},method=RequestMethod.GET)
-	public @ResponseBody String getUser(@RequestParam  String account,@RequestParam String password,HttpServletResponse response) {
+	public @ResponseBody String getUser(@RequestParam  String account,@RequestParam String password,HttpServletResponse response,HttpServletRequest request) {
 		
 		Gson gson=new Gson();
 		Map map=new HashMap();	
@@ -222,17 +222,17 @@ defaultValue：参数的默认值
 		map.put("code", 200);
 		map.put("user", user);
 		
-		
-		
-		System.out.println(user.getAccount());
-		System.out.println(user.getAccount().replaceAll(" ", ""));
-		Cookie  cookie = new Cookie(getMD5(user.getAccount()),getMD5(user.getAccount()));
+        HttpSession session=request.getSession();
+        session.setAttribute("user", user.getAccount());
+        session.setMaxInactiveInterval(60*60);
+		Cookie  cookie = new Cookie("user",getMD5(user.getAccount()));
 		
 		//设置Cookie最大生存时间,以秒为单位,负数的话为浏览器进程,关闭浏览器Cookie消失 
 		 cookie.setMaxAge(60*60);//设置cookie过期时间为1个小时
 		//设置路径，这个路径即该工程下都可以访问该cookie 如果不设置路径，那么只有设置该cookie路径及其子路径可以访问
-		cookie.setPath("/");
-		cookie.setDomain("ma.xiaomy.net");
+		cookie.setPath("/ma");
+		//cookie.setDomain("ma.xiaomy.net");
+		//cookie.setDomain("192.168.117.66:8080");
 		// 将Cookie添加到Response中,使之生效 
 		response.addCookie(cookie);
 		System.out.println(cookie);
@@ -266,7 +266,7 @@ defaultValue：参数的默认值
 	        @ApiResponse(code=5000,message="后台错误")
 	    })*/
 	  
-	@RequestMapping(value={"/setUser"},method=RequestMethod.POST)
+	@RequestMapping(value={"/setUser"},method=RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String setUser(@RequestBody User user) {
 		
 		Gson gson=new Gson();
