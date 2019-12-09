@@ -22,7 +22,7 @@ private Integer id;
 private String account;
 private String password;
 private String mailbox;
-private User user;
+
 
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Id
@@ -50,20 +50,12 @@ public String getMailbox() {
 public void setMailbox(String mailbox) {
 	this.mailbox = mailbox;
 }
-
-@OneToOne
-@JoinColumn(name="id",unique=true)
-public User getUser() {
-	return user;
-}
-public void setUser(User user) {
-	this.user = user;
-}
 @Override
 public String toString() {
-	return "User [id=" + id + ", account=" + account + ", password=" + password + ", mailbox=" + mailbox + ", user="
-			+ user + "]";
+	return "User [id=" + id + ", account=" + account + ", password=" + password + ", mailbox=" + mailbox + "]";
 }
+
+
 
 
 

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -24,6 +26,7 @@ private String grade;
 private Integer experience;
 private String head_img;
 private Integer score;
+private User user;
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Id
 public Integer getId() {
@@ -68,11 +71,24 @@ public Integer getScore() {
 public void setScore(Integer score) {
 	this.score = score;
 }
+
+
+
+
+@OneToOne
+@JoinColumn(name="user_id",unique=true)
+public User getUser() {
+	return user;
+}
+public void setUser(User user) {
+	this.user = user;
+}
 @Override
 public String toString() {
 	return "UserInfo [id=" + id + ", name=" + name + ", clazz=" + clazz + ", grade=" + grade + ", experience="
-			+ experience + ", head_img=" + head_img + ", score=" + score + "]";
+			+ experience + ", head_img=" + head_img + ", score=" + score + ", user=" + user + "]";
 }
+
 
 
 
