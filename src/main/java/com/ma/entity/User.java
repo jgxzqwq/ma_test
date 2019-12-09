@@ -52,7 +52,7 @@ public void setMailbox(String mailbox) {
 }
 
 @OneToOne
-@JoinColumn(name="user_id",unique=true)
+@JoinColumn(name="id",unique=true)
 public User getUser() {
 	return user;
 }
