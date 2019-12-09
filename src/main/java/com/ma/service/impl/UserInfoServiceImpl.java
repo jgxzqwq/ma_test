@@ -1,8 +1,11 @@
 package com.ma.service.impl;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import com.ma.entity.UserInfo;
 import com.ma.repository.UserInfoRepository;
@@ -19,5 +22,15 @@ public class UserInfoServiceImpl implements UserInfoService{
 		
 		userInfoRepository.updateUserInfo(userInfo);
 	}
+	@Override
+	public UserInfo conditionQuery(Integer id) {
+		
+		UserInfo findOne = userInfoRepository.findOne(id);
+	
+			return findOne;
+	}
+
+	
+	
 
 }

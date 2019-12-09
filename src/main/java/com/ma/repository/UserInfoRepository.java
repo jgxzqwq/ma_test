@@ -18,6 +18,10 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer>{
 	
 	
 	
-	@Query(value="select * from UserInfo  where id=:#{#userInfo.id}",nativeQuery=true)
+	@Query(value="select * from UserInfo  where id= ?#{#userInfo.getId()}",nativeQuery=true)
 	void updateUserInfo(UserInfo userInfo);
+	
+	
+	
+
 }

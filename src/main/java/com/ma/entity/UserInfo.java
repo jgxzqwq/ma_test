@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -24,6 +25,8 @@ private String grade;
 private Integer experience;
 private String head_img;
 private Integer score;
+
+private Integer user_id;
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Id
 public Integer getId() {
@@ -67,6 +70,11 @@ public Integer getScore() {
 }
 public void setScore(Integer score) {
 	this.score = score;
+}
+
+
+public static long getSerialversionuid() {
+	return serialVersionUID;
 }
 @Override
 public String toString() {
