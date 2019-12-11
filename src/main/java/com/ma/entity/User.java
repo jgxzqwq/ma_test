@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 
 
 //数据库表
@@ -22,6 +25,7 @@ private Integer id;
 private String account;
 private String password;
 private String mailbox;
+
 
 
 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,12 +54,15 @@ public String getMailbox() {
 public void setMailbox(String mailbox) {
 	this.mailbox = mailbox;
 }
-@Override
-public String toString() {
-	return "User [id=" + id + ", account=" + account + ", password=" + password + ", mailbox=" + mailbox + "]";
+
+public static long getSerialversionuid() {
+	return serialVersionUID;
 }
 
-
+@Override
+public String toString() {
+	return "User [id=" + id + ", account=" + account + ", password=" + password + ", mailbox=" + mailbox + ", "+ "]";
+}
 
 
 

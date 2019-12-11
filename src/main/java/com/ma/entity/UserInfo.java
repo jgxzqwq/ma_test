@@ -9,12 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 
 
 //数据库表
 @Table(name="userinfo")
 //实体类
-@Entity(name = "userInfo")
+@Entity(name="userInfo")
 public class UserInfo implements Serializable {
 	
 private static final long serialVersionUID = 1L;
@@ -26,7 +29,11 @@ private String grade;
 private Integer experience;
 private String head_img;
 private Integer score;
+
+
+
 private User user;
+
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Id
 public Integer getId() {
@@ -49,6 +56,15 @@ public void setClazz(String clazz) {
 }
 public String getGrade() {
 	return grade;
+}
+@OneToOne
+@JoinColumn(name="user_id",unique=true)
+public User getUser() {
+	return user;
+}
+
+public void setUser(User user) {
+	this.user = user;
 }
 public void setGrade(String grade) {
 	this.grade = grade;
@@ -73,22 +89,15 @@ public void setScore(Integer score) {
 }
 
 
-
-
-@OneToOne
-@JoinColumn(name="user_id",unique=true)
-public User getUser() {
-	return user;
-}
-public void setUser(User user) {
-	this.user = user;
+public static long getSerialversionuid() {
+	return serialVersionUID;
 }
 @Override
 public String toString() {
 	return "UserInfo [id=" + id + ", name=" + name + ", clazz=" + clazz + ", grade=" + grade + ", experience="
-			+ experience + ", head_img=" + head_img + ", score=" + score + ", user=" + user + "]";
+			+ experience + ", head_img=" + head_img + ", score=" + score +", user=" + user
+			+ "]";
 }
-
 
 
 

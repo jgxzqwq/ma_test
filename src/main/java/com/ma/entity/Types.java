@@ -19,6 +19,7 @@ private static final long serialVersionUID = 1L;
 
 private Integer id;
 private String type;
+private String table_name;
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Id
 public Integer getId() {
@@ -33,10 +34,17 @@ public String getType() {
 public void setType(String type) {
 	this.type = type;
 }
+
+public String getTable_name() {
+	return table_name;
+}
+public void setTable_name(String table_name) {
+	this.table_name = table_name;
+}
 @Override
 public String toString() {
-	return "Types [id=" + id + ", type=" + type + "]";
+	return "Types [id=" + id + ", type=" + type + ", table_name=" + table_name + "]";
 }
 
 
-}
+}	

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class UserInfoController {
 	@Autowired
 	private UserInfoService userInfoService;
 	
+
+	
+	
 	@RequestMapping(value="/updateUserInfo", method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	public @ResponseBody String updateInfo(@RequestBody UserInfo userInfo) {
 		/*System.out.println("xxxx");
@@ -48,5 +52,5 @@ public class UserInfoController {
 		//response.getWriter().write(json);
 		return gson.toJson(map);
 	}
-	
+	 
 }

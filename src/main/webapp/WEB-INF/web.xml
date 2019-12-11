@@ -31,8 +31,17 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  	<!-- 登录状态过滤器 -->
+	<!-- <filter>
+		<filter-name>LoginInterceptor</filter-name>
+		<filter-class>com.ma.filter.LoginInterceptor</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginInterceptor</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
 
-  <filter>
+  <filter> 
     <filter-name>hiddenHttpMethodFilter</filter-name>
     <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
   </filter>

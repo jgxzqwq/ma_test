@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js" ></script>
+</head>
+<body>
+			<h1>首页</h1>
+			<a href="/frame_bank?1"></a>
+			<script>
+			$(function(){
+			
+				
+				$.ajax({
+					type:"get",
+					url:"http://localhost:8080/ma/Init",
+					dataType:"json",
+					ContentType :"application/x-www-form-urlencoded",
+					 success:function(data){
+						 	console.log(data)
+						 }
+				});
+				$.ajax({
+					type:"get",
+					url:"http://localhost:8080/ma/getQuestionTypes",
+					dataType:"json",
+					ContentType :"application/x-www-form-urlencoded",
+					 success:function(data){
+						 	console.log(data)
+						 }
+				});
+			})
+			
+			
+			</script>
+</body>
+</html>

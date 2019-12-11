@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.ma.entity.User;
+import com.ma.entity.UserInfo;
 import com.ma.service.MailboxService;
+import com.ma.service.UserInfoService;
 import com.ma.service.UserService;
 
 import io.swagger.annotations.Api;
@@ -42,6 +44,7 @@ public class UserController {
 	@Autowired
 	private MailboxService mailboxService;
 	
+
 	/*
 	 * 
 	 * 注意：@ApiImplicitParam的参数说明：
@@ -285,7 +288,7 @@ defaultValue：参数的默认值
 		return gson.toJson(map);
 	}
 	
-  
+	 
 
 	static private String getMD5(String password){
 	      StringBuffer buf = new StringBuffer("");

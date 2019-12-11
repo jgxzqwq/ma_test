@@ -19,5 +19,13 @@ public class UserInfoServiceImpl implements UserInfoService{
 	
 		return userInfoRepository.updateUserInfo(userInfo);
 	}
+	@Override
+	public UserInfo conditionQuery(Integer id) {
+		
+		UserInfo findOne = userInfoRepository.findOne(id);
+	
+			return findOne;
+	}
+
 
 }
