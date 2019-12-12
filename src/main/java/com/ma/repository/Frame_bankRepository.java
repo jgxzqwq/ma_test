@@ -2,8 +2,7 @@ package com.ma.repository;
 
 import java.util.List;
 
-import org.apache.logging.log4j.core.config.plugins.PluginValue;
-import org.junit.Test;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

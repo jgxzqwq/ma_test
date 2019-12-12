@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 //数据库表
 @Table(name="java_intermediate_bank")
 //实体类
@@ -80,6 +83,7 @@ public class Java_intermediate_bank  implements Serializable {
 	}
 	@JoinColumn(name="type_id")
 	@ManyToOne(fetch=FetchType.LAZY)
+	@NotFound(action= NotFoundAction.IGNORE) //注解，找不到引用的外键数据时忽略，NotFound默认是exception
 	public Types getType() {
 		return type;
 	}

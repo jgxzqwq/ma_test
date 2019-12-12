@@ -14,8 +14,10 @@
 				
 				$.ajax({
 					type:"get",
-				
 					url:"http://localhost:8080/ma/ssss",
+					data: {
+					"type": 4
+					},
 					dataType:"json",
 					ContentType :"application/x-www-form-urlencoded",
 					success: function(data) {
