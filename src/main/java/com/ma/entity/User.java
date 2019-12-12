@@ -26,8 +26,7 @@ private String account;
 private String password;
 private String mailbox;
 
-
-
+private Paper_records paper_records;
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Id
 public Integer getId() {
@@ -55,10 +54,15 @@ public void setMailbox(String mailbox) {
 	this.mailbox = mailbox;
 }
 
-public static long getSerialversionuid() {
-	return serialVersionUID;
-}
 
+@OneToOne
+@JoinColumn(name="id",unique=true)
+public Paper_records getPaper_records() {
+	return paper_records;
+}
+public void setPaper_records(Paper_records paper_records) {
+	this.paper_records = paper_records;
+}
 @Override
 public String toString() {
 	return "User [id=" + id + ", account=" + account + ", password=" + password + ", mailbox=" + mailbox + ", "+ "]";

@@ -9,7 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 //数据库表
@@ -20,12 +22,17 @@ public class Paper_records implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private User user;
-	private Frame_bank frame_bank;
-	private Front_end_bank front_end_bank;
-	private Java_advanced_bank java_advanced_bank;
-	private Java_intermediate_bank java_intermediate_bank;
-    private Java_junior_bank java_junior_bank;
+	@Transient
+	private Integer user_id;
+	private Integer frame_id;
+	private Integer front_end_id;
+	private Integer java_advanced_id;
+	private Integer java_intermediate_id;
+    private Integer java_junior_id;
+    
+    @OneToOne
+    @JoinColumn(name="user_id",unique=true)
+    private User user;
     
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
@@ -35,61 +42,57 @@ public class Paper_records implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public Integer getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
+	}
+	public Integer getFrame_id() {
+		return frame_id;
+	}
+	public void setFrame_id(Integer frame_id) {
+		this.frame_id = frame_id;
+	}
+	public Integer getFront_end_id() {
+		return front_end_id;
+	}
+	public void setFront_end_id(Integer front_end_id) {
+		this.front_end_id = front_end_id;
+	}
+	public Integer getJava_advanced_id() {
+		return java_advanced_id;
+	}
+	public void setJava_advanced_id(Integer java_advanced_id) {
+		this.java_advanced_id = java_advanced_id;
+	}
+	public Integer getJava_intermediate_id() {
+		return java_intermediate_id;
+	}
+	public void setJava_intermediate_id(Integer java_intermediate_id) {
+		this.java_intermediate_id = java_intermediate_id;
+	}
+	public Integer getJava_junior_id() {
+		return java_junior_id;
+	}
+	public void setJava_junior_id(Integer java_junior_id) {
+		this.java_junior_id = java_junior_id;
+	}
 	
-	@JoinColumn(name="user_id")
-	@ManyToOne(fetch=FetchType.LAZY)
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
 	}
-	@JoinColumn(name="frame_id")
-	@ManyToOne(fetch=FetchType.LAZY)
-	public Frame_bank getFrame_bank() {
-		return frame_bank;
-	}
-	public void setFrame_bank(Frame_bank frame_bank) {
-		this.frame_bank = frame_bank;
-	}
-	@JoinColumn(name="front_end_id")
-	@ManyToOne(fetch=FetchType.LAZY)
-	public Front_end_bank getFront_end_bank() {
-		return front_end_bank;
-	}
-	public void setFront_end_bank(Front_end_bank front_end_bank) {
-		this.front_end_bank = front_end_bank;
-	}
-	@JoinColumn(name="java_advanced_id")
-	@ManyToOne(fetch=FetchType.LAZY)
-	public Java_advanced_bank getJava_advanced_bank() {
-		return java_advanced_bank;
-	}
-	public void setJava_advanced_bank(Java_advanced_bank java_advanced_bank) {
-		this.java_advanced_bank = java_advanced_bank;
-	}
-	@JoinColumn(name="java_intermediate_id")
-	@ManyToOne(fetch=FetchType.LAZY)
-	public Java_intermediate_bank getJava_intermediate_bank() {
-		return java_intermediate_bank;
-	}
-	public void setJava_intermediate_bank(Java_intermediate_bank java_intermediate_bank) {
-		this.java_intermediate_bank = java_intermediate_bank;
-	}
-	@JoinColumn(name="java_junior_id")
-	@ManyToOne(fetch=FetchType.LAZY)
-	public Java_junior_bank getJava_junior_bank() {
-		return java_junior_bank;
-	}
-	public void setJava_junior_bank(Java_junior_bank java_junior_bank) {
-		this.java_junior_bank = java_junior_bank;
-	}
 	@Override
 	public String toString() {
-		return "Paper_records [id=" + id + ", user=" + user + ", frame_bank=" + frame_bank + ", front_end_bank="
-				+ front_end_bank + ", java_advanced_bank=" + java_advanced_bank + ", java_intermediate_bank="
-				+ java_intermediate_bank + ", java_junior_bank=" + java_junior_bank + "]";
+		return "Paper_records [id=" + id + ", user_id=" + user_id + ", frame_id=" + frame_id + ", front_end_id="
+				+ front_end_id + ", java_advanced_id=" + java_advanced_id + ", java_intermediate_id="
+				+ java_intermediate_id + ", java_junior_id=" + java_junior_id + "]";
 	}
+	
+
     
     
     
