@@ -22,31 +22,21 @@ public class Paper_records implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	@Transient
-	private Integer user_id;
 	private Integer frame_id;
 	private Integer front_end_id;
 	private Integer java_advanced_id;
 	private Integer java_intermediate_id;
     private Integer java_junior_id;
     
-    @OneToOne
-    @JoinColumn(name="user_id",unique=true)
-    private User user;
+  
     
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+  
 	@Id
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Integer getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
 	}
 	public Integer getFrame_id() {
 		return frame_id;
@@ -79,18 +69,13 @@ public class Paper_records implements Serializable {
 		this.java_junior_id = java_junior_id;
 	}
 	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	@Override
 	public String toString() {
-		return "Paper_records [id=" + id + ", user_id=" + user_id + ", frame_id=" + frame_id + ", front_end_id="
+		return "Paper_records [id=" + id +  ", frame_id=" + frame_id + ", front_end_id="
 				+ front_end_id + ", java_advanced_id=" + java_advanced_id + ", java_intermediate_id="
-				+ java_intermediate_id + ", java_junior_id=" + java_junior_id + "]";
+				+ java_intermediate_id + ", java_junior_id=" + java_junior_id  + "]";
 	}
+
 	
 
     

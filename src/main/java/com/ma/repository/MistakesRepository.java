@@ -11,7 +11,7 @@ import com.ma.entity.Mistakes;
 public interface MistakesRepository extends JpaRepository<Mistakes, Integer>{
 	
 
-	@Query(value="select count(id) from mistakes  where user_id = :user_id",nativeQuery=true)
-	Integer Statistics(@Param("user_id")Integer user_id);
+	@Query(value="select count(id) from mistakes  where user_id = :user_id and mistakes_type = :mistakes_type  ",nativeQuery=true)
+	Integer Statistics(@Param("user_id")Integer user_id,@Param("mistakes_type") Integer mistakes_type);
 
 }

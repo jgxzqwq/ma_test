@@ -33,25 +33,28 @@ public class QuestionsController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("ssss")
+	@RequestMapping("getQuestions")
 	@ResponseBody
 	public Map dsf(HttpServletRequest re,@RequestParam  Integer type)
 	{
 		
 		Map map = new HashMap();
 			
-			User user = userService.getName("10010");
-			System.out.println(user.toString());
+			User user = userService.getName("10086");
+			System.out.println(user.getPaper_records());
+			
+			
 			
 			List questions = questionsBankService.getQuestions(user, type);
-		
-		
-		
-			 map.put("code", 200);
+			for (Object object : questions) {
+				System.out.println(object);
+			}
+			
+			map.put("code", 200);
 			 
 			 map.put("questions", questions);
 	
-			 System.out.println("1212");
+			System.out.println("1212");
 			
 			
 		

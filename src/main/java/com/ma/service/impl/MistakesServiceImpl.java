@@ -21,9 +21,9 @@ public class MistakesServiceImpl implements MistakesService{
 	
 	//统计该用户该类型的错题数量
 	@Override
-	public Integer getStatistics(Integer user_id) {
+	public Integer getStatistics(Integer user_id,Integer mistakes_type) {
 		Integer quantity = 10;
-		Integer statistics = mistakesRepository.Statistics(user_id);
+		Integer statistics = mistakesRepository.Statistics(user_id,mistakes_type);
 		if (statistics>3) {
 			return quantity;
 		}

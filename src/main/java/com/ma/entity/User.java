@@ -11,6 +11,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 
 
 
@@ -57,6 +60,7 @@ public void setMailbox(String mailbox) {
 
 @OneToOne
 @JoinColumn(name="id",unique=true)
+@NotFound(action= NotFoundAction.IGNORE) //注解，找不到引用的外键数据时忽略，NotFound默认是exception
 public Paper_records getPaper_records() {
 	return paper_records;
 }

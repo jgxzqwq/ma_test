@@ -7,5 +7,5 @@ import com.ma.entity.Mistakes;
 public interface MistakesService {
 
 	//统计错题数
-	public Integer getStatistics(Integer user_id);
+	public Integer getStatistics(Integer user_id,Integer mistakes_type);
 }

@@ -14,6 +14,7 @@ import com.ma.service.JavaAdvancedBankService;
 import com.ma.service.JavaIntermediateBankService;
 import com.ma.service.JavaJuniorBankService;
 import com.ma.service.MistakesService;
+import com.ma.service.Paper_recordsService;
 import com.ma.service.QuestionsBankService;
 import com.ma.service.UserService;
 
@@ -39,12 +40,25 @@ public class QuestionsBankServiceImpl implements QuestionsBankService {
 	@Autowired
 	private MistakesService mistakesService;
 
+	@Autowired
+	private Paper_recordsService paperRecords;
 	
 	//获取试题
 	@Override
 	public List getQuestions(User user, Integer questionType) {
 		
-		Integer statistics = mistakesService.getStatistics(user.getId());
+		//通过用户id查询错题库该用户该
+		Integer statistics = mistakesService.getStatistics(user.getId(),questionType);
+		
+		System.out.println(statistics);
+		
+		Paper_records paper_records = user.getPaper_records();
+		System.out.println(user.getPaper_records());
+		if (paper_records==null) {
+			paper_records = paperRecords.addRecord(user.getId());
+		}
+		System.out.println(paper_records.toString());
+	
 		List types = type(questionType,user.getPaper_records(),statistics);
 	
 		return types;
@@ -61,6 +75,7 @@ public class QuestionsBankServiceImpl implements QuestionsBankService {
 		case 1:
 	
 			sd = frameBank.getSubject(pa.getFrame_id(), quantity);
+		
 			break;
 		case 2:
 			System.out.println(2);
